@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Viewer</title>
+        <style type="text/css">
+            #viewer {
+                width: 640px;
+                height: 480px;
+                position: relative;
+                outline: 1px solid black;
+            }
+        </style>
+        <script type="text/javascript" src="js/hoops/hoops_web_viewer.js" ></script>
+        <script type="text/javascript" src="js/hoops/Menu.js" ></script>
+        <script type="text/javascript" src="js/hoops/SelectOperator.js" ></script>
+        <script type="text/javascript">
+            window.onload = () => {
+                hwv = new Communicator.WebViewer({
+                    containerId: "viewer",
+                    endpointUri: "data/microengine.scs"
+                })
+
+                hwv.setCallbacks({
+                    sceneReady: () => {
+                        hwv.view.setBackgroundColor(Communicator.Color.blue(), Communicator.Color.white());
+                    },
+                    modelStructureReady: () => {
+                        document.getElementById('ModelStructureReady').innerHTML = "Model Structure Ready";
+                    },
+                    camera: () => {
+                        document.getElementById('CameraData').innerHTML = JSON.stringify(hwv.view.getCamera().toJson(), null, 4)
+                    }
+                })
+
+                let menu = new Menu(hwv);
+                hwv.start();
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Web Viewer Minimal Example</h3>
+        <div id="viewer"></div>
+
+        <div>
+            <h4>Model Structure...</h4>
+            <div id="ModelStructureReady">Not Ready</div>
+        </div>
+
+        <div>
+            <h4>Camera Callback</h4>
+            <pre id="CameraData"></pre>
+        </div>
+
+        <div id="SwitchOperator">
+            <h4>Switch Operator</h4>
+            <div>
+                <label for="operatorType">Operator: </label>
+                <select id="operatorType">
+                    <option value="Orbit">Orbit</option>
+                    <option value="Area Select">Area Select</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="DrawMode">
+            <h4>Draw Mode</h4>
+            <div>
+                <label for="drawmodeType">Draw Mode: </label>
+                <select id="drawmodeType">
+                    <option value="Solid with Edges">Solid</option>
+                    <option value="Wireframe">Wireframe</option>
+                    <option value="Hidden Line">Hidden Line</option>
+                </select>
+            </div>
+        </div>
+    </body>
+</html>
