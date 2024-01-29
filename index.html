@@ -13,6 +13,7 @@
         <script type="text/javascript" src="js/hoops/hoops_web_viewer.js" ></script>
         <script type="text/javascript" src="js/hoops/Menu.js" ></script>
         <script type="text/javascript" src="js/hoops/SelectOperator.js" ></script>
+        <script type="text/javascript" src="js/hoops/MeasureOperator.js" ></script>
         <script type="text/javascript">
             window.onload = () => {
                 hwv = new Communicator.WebViewer({
@@ -58,6 +59,8 @@
                 <select id="operatorType">
                     <option value="Orbit">Orbit</option>
                     <option value="Area Select">Area Select</option>
+                    <option value="Select">Select</option>
+                    <option value="Measure">Measure</option>
                 </select>
             </div>
         </div>
@@ -69,7 +72,7 @@
                 <select id="drawmodeType">
                     <option value="Solid with Edges">Solid</option>
                     <option value="Wireframe">Wireframe</option>
-                    <option value="Hidden Line">Hidden Line</option>
+                    <option value="HiddenLine">Hidden Line</option>
                 </select>
             </div>
         </div>
